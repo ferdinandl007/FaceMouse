@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CF0D316420D66A2B00B130B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D316320D66A2B00B130B0 /* AppDelegate.swift */; };
-		CF0D316620D66A2B00B130B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D316520D66A2B00B130B0 /* ViewController.swift */; };
 		CF0D316820D66A2C00B130B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF0D316720D66A2C00B130B0 /* Assets.xcassets */; };
 		CF0D316B20D66A2C00B130B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF0D316920D66A2C00B130B0 /* Main.storyboard */; };
 		CF0D317720D66A2C00B130B0 /* FaceMouseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D317620D66A2C00B130B0 /* FaceMouseTests.swift */; };
 		CF0D318220D66A2C00B130B0 /* FaceMouseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D318120D66A2C00B130B0 /* FaceMouseUITests.swift */; };
+		CF0D319020D66A4600B130B0 /* Visage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D318F20D66A4600B130B0 /* Visage.swift */; };
+		CF51119E20D7F06A002B7E2F /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF51119D20D7F06A002B7E2F /* extensions.swift */; };
+		CF77D09120D6BFC500C494FC /* FaceMouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +37,6 @@
 /* Begin PBXFileReference section */
 		CF0D316020D66A2B00B130B0 /* FaceMouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceMouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0D316320D66A2B00B130B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CF0D316520D66A2B00B130B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CF0D316720D66A2C00B130B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF0D316A20D66A2C00B130B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF0D316C20D66A2C00B130B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +47,9 @@
 		CF0D317D20D66A2C00B130B0 /* FaceMouseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaceMouseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0D318120D66A2C00B130B0 /* FaceMouseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMouseUITests.swift; sourceTree = "<group>"; };
 		CF0D318320D66A2C00B130B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF0D318F20D66A4600B130B0 /* Visage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visage.swift; sourceTree = "<group>"; };
+		CF51119D20D7F06A002B7E2F /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMouseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				CF0D316320D66A2B00B130B0 /* AppDelegate.swift */,
-				CF0D316520D66A2B00B130B0 /* ViewController.swift */,
+				CF0D318F20D66A4600B130B0 /* Visage.swift */,
+				CF51119D20D7F06A002B7E2F /* extensions.swift */,
+				CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */,
 				CF0D316720D66A2C00B130B0 /* Assets.xcassets */,
 				CF0D316920D66A2C00B130B0 /* Main.storyboard */,
 				CF0D316C20D66A2C00B130B0 /* Info.plist */,
@@ -192,6 +198,11 @@
 				TargetAttributes = {
 					CF0D315F20D66A2B00B130B0 = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					CF0D317120D66A2C00B130B0 = {
 						CreatedOnToolsVersion = 9.4;
@@ -254,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF0D316620D66A2B00B130B0 /* ViewController.swift in Sources */,
+				CF51119E20D7F06A002B7E2F /* extensions.swift in Sources */,
+				CF0D319020D66A4600B130B0 /* Visage.swift in Sources */,
 				CF0D316420D66A2B00B130B0 /* AppDelegate.swift in Sources */,
+				CF77D09120D6BFC500C494FC /* FaceMouseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +432,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FaceMouse/FaceMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8M8S4HQM6M;
@@ -438,7 +450,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FaceMouse/FaceMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8M8S4HQM6M;
