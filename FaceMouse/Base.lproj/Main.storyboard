@@ -744,7 +744,7 @@
                                     <constraint firstAttribute="height" constant="22" id="N0k-53-DUK"/>
                                     <constraint firstAttribute="width" constant="372" id="Zzo-vi-7cN"/>
                                 </constraints>
-                                <sliderCell key="cell" state="on" alignment="left" minValue="2" maxValue="10" doubleValue="3.1428571428571428" tickMarkPosition="above" numberOfTickMarks="8" allowsTickMarkValuesOnly="YES" sliderType="linear" id="2Zv-YR-ozy"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="2Zv-YR-ozy"/>
                                 <connections>
                                     <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="46t-R5-gbP"/>
                                 </connections>

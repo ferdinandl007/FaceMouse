@@ -32,7 +32,8 @@ class FaceMouseViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         camara.setSpeed(sensitivityint: getSensitivity(), speed: getSpeed())
-        speedSlider.intValue = Int32(getSpeed())
+        speedSlider.integerValue = getSpeed()
+        sensitivitySlider.floatValue = 5 - getSensitivity()
         label.stringValue = "when pressing the start button try to look in the centre of the screen for about 4 seconds"
     }
     
@@ -40,14 +41,17 @@ class FaceMouseViewController: NSViewController {
 
     
     @IBAction func sensitivitySliderAction(_ sender: Any) {
-        let value = speedSlider.integerValue
+        let value =  sensitivitySlider.floatValue
         defaults.set(value, forKey: "Sensitivity")
-        camara.setSpeed(sensitivityint: value, speed: speedSlider.integerValue)
+        camara.setSpeed(sensitivityint: 5 - value, speed: speedSlider.integerValue)
+        print(value)
+
     }
     @IBAction func speedSliderAction(_ sender: Any){
         let value = speedSlider.integerValue
-        camara.setSpeed(sensitivityint: sensitivitySlider.integerValue, speed: value)
+        camara.setSpeed(sensitivityint: sensitivitySlider.floatValue, speed: value)
         defaults.set(value, forKey: "Speed")
+
     
     }
     @IBAction func quitButton(_ sender: Any) {
@@ -105,11 +109,11 @@ extension FaceMouseViewController {
         }
     }
     
-    func getSensitivity() -> Int {
-        if let session = UserDefaults.standard.value(forKey: "sensitivity") as? Int {
+    func getSensitivity() -> Float {
+        if let session = UserDefaults.standard.value(forKey: "sensitivity") as? Float {
             return session
         } else {
-            return 3
+            return 2.0
         }
     }
 }

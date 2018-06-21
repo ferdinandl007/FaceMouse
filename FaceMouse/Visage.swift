@@ -64,6 +64,9 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate var hasEnded = false
     
     
+
+    
+    
     //  this method is called when the class is initialised
     override init() {
         super.init()
@@ -90,6 +93,8 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         self.captureSession.startRunning()
         //  this starts the face tracking
         self.faceDetection()
+        
+       
     }
     
     // Method to end  the capture session as well as terminate the face tracking loop
@@ -200,19 +205,19 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     fileprivate func mouse(position: CGPoint ,faceFeature: CIFaceFeature){
-       
-        if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.sens[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.sens[1] * sensitivity - 1) {
-            
-            
-            mouseLocation = CGPoint(x: mouseLocation.x + ((((trueCentre.x - position.x)) / trueCentre.x) * speed), y: mouseLocation.y + (((trueCentre.y - position.y)) / trueCentre.y) * speed)
         
+        
+       
+       
+        if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.sens[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.sens[1] * fabs(sensitivity - 1)) {
+
+            mouseLocation = CGPoint(x: mouseLocation.x + ((((trueCentre.x - position.x)) / trueCentre.x) * speed), y: mouseLocation.y + (((trueCentre.y - position.y)) / trueCentre.y) * speed)
+            self.mousePos = position
             let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
             c?.post(tap: .cgSessionEventTap )
-            self.mousePos = position
-           
         
        }
-        
+        print(sensitivity)
 
         // Checks if  a smile is equal to  the user's smile 3
         if self.isSmile == faceFeature.hasSmile {
@@ -232,7 +237,14 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     print("Triple Click")
                     
                 } else if faceFeature.leftEyeClosed {
-                    
+                   
+                        if let screen = NSScreen.main {
+                            let rect = screen.frame
+                             mouseLocation = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
+                            let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
+                            c?.post(tap: .cgSessionEventTap )
+                        }
+
                 } else {
                     let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
                     x?.post(tap: .cgSessionEventTap )
@@ -247,6 +259,8 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 x?.post(tap: .cgSessionEventTap )
             }
         }
+        
+
     }
         
     
@@ -283,7 +297,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                 guard let calYMin = self.calY.min() else {return}
                                 self.sens.append((calXMax - calXMin) / calXMax)
                                 self.sens.append((calYMax - calYMin) / calYMax)
-                                print((calYMax - calYMin) / calYMax)
+                                print(self.sens)
 
                                 self.trueCentre = CGPoint(x: self.calX.average, y: self.calY.average)
                                 print("trueCentre = ",self.trueCentre)
@@ -309,8 +323,9 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
       
     }
     
-    public func setSensitivity(sensitivityint: Int, speeds: Int) {
+    public func setSensitivity(sensitivityint: Float, speeds: Int) {
         speed = CGFloat(speeds)
+        sensitivity = CGFloat(sensitivityint)
         
     }
     
@@ -361,7 +376,7 @@ class Camara: NSView {
         }
     }
     
-    public func setSpeed(sensitivityint: Int,speed: Int) {
+    public func setSpeed(sensitivityint: Float,speed: Int) {
         camaraRec.setSensitivity(sensitivityint: sensitivityint, speeds: speed)
     }
     
