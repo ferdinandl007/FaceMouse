@@ -292,49 +292,64 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     // checks if the feature is a CIFaceFeature if yes assign feature to face feature and go on.
                     if let faceFeature = feature as? CIFaceFeature {
                         
-                        
+                        // To check every calibration is needed
                         if !self.hasEnded {
-                            
+                            //  check if enough data has been captured
                             if self.calX.count > 100 {
+                                
+                                //  calculate  min and max for X and Y
                                 guard let calXMax = self.calX.max() else {return}
                                 guard let calXMin = self.calX.min() else {return}
                                 guard let calYMax = self.calY.max() else {return}
                                 guard let calYMin = self.calY.min() else {return}
+                                
+                                //  The said calibration data to a empty array
+                                 self.calibrationData = []
+                                
+                                //  append the difference between minimum maximum as a  percentage Delta to  calibrated data.
                                 self.calibrationData.append((calXMax - calXMin) / calXMax)
                                 self.calibrationData.append((calYMax - calYMin) / calYMax)
                                 print(self.calibrationData)
-
+                                
+                                //  calculating the true centre of the mouse by taking the average of all captured coordinates
                                 self.trueCentre = CGPoint(x: self.calX.average, y: self.calY.average)
                                 print("trueCentre = ",self.trueCentre)
+                                
                                 self.hasEnded = true
                             } else {
+                                //  add capture data to X and Y
                                 self.calX.append(faceFeature.mouthPosition.x)
                                 self.calY.append(faceFeature.mouthPosition.y)
-                                
-                                    }
-                            } else {
-                            self.mouse(position: faceFeature.mouthPosition, faceFeature: faceFeature)
                             }
+                            
+                        } else {
+                            // update mouse position
+                            self.mouse(position: faceFeature.mouthPosition, faceFeature: faceFeature)
+                        }
                     }
                 }
             }
+            //  tells the dispatch group  that everything is finished processing
             group.leave()
         }
+        
+        //  this gets called after the above code has finished processing  to recall and process  basically Loop
         group.notify(queue: .main) {
+            
+            //  checks if the Loop need to be terminated
             if !self.faceTrackingEnds {
                 self.faceDetection()
             }
         }
-      
     }
     
+    //  function to set sensitivity and speed
     public func setSensitivity(sensitivityint: Float, speeds: Int) {
         speed = CGFloat(speeds)
         sensitivity = CGFloat(sensitivityint)
         
     }
-    
-    
+
     
 }// end of class
 
