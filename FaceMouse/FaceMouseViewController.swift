@@ -31,18 +31,17 @@ class FaceMouseViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        camara.setSpeed(sensitivityint: getSensitivity(), speed: getSpeed())
+        camara.setSpeed(sensitivityint: 5 - getSensitivity(), speed: getSpeed())
         speedSlider.integerValue = getSpeed()
-        sensitivitySlider.floatValue = 5 - getSensitivity()
-        label.stringValue = "when pressing the start button try to look in the centre of the screen for about 4 seconds"
+        sensitivitySlider.floatValue = getSensitivity()
+        label.stringValue = "When pressing the start button try to look in the centre of the screen for about 4 seconds"
+        
     }
-    
-
 
     
     @IBAction func sensitivitySliderAction(_ sender: Any) {
         let value =  sensitivitySlider.floatValue
-        defaults.set(value, forKey: "Sensitivity")
+        defaults.set(value, forKey: "sensitivity")
         camara.setSpeed(sensitivityint: 5 - value, speed: speedSlider.integerValue)
         print(value)
 
@@ -113,7 +112,7 @@ extension FaceMouseViewController {
         if let session = UserDefaults.standard.value(forKey: "sensitivity") as? Float {
             return session
         } else {
-            return 2.0
+            return 4
         }
     }
 }
