@@ -189,8 +189,8 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate func allFeatures(sample: CMSampleBuffer) -> [CIFeature]?{
     
         //  casting the sample buffer to CMSampleBuffer and assigning it to pixelBuffer
-//        let pixelBuffer = sample.imageBuffer // Mac OS .14
-        let pixelBuffer = CMSampleBufferGetImageBuffer(sample)
+//        let pixelBuffer = sample.imageBuffer // MacOS .14
+        let pixelBuffer = CMSampleBufferGetImageBuffer(sample) // MacOS .13
         let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sample, kCMAttachmentMode_ShouldPropagate)
     
     
@@ -214,7 +214,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
        
        //  determines if the mouse is meant to be moved or to ignore
         if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.calibrationData[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.calibrationData[1] * fabs(sensitivity - 1)) {
-
+            // This calculates the Delta on the face to the true centre  and then  applies a corresponding vector to the mouse.
             mouseLocation = CGPoint(x: mouseLocation.x + ((((trueCentre.x - position.x)) / trueCentre.x) * speed), y: mouseLocation.y + (((trueCentre.y - position.y)) / trueCentre.y) * speed)
             let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
             c?.post(tap: .cgSessionEventTap )
@@ -265,7 +265,8 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
         
-
+        
+        
     }
         
     
@@ -390,7 +391,6 @@ class Camara: NSView {
     public func faceTracking(yes: Bool){
         if yes {
             camaraRec.beginFaceDetection()
-            print("b")
         } else {
             camaraRec.endFaceDetection()
         }
