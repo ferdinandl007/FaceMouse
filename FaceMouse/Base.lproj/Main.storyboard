@@ -728,9 +728,9 @@
                                 </textFieldCell>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Um-x8-CUf">
-                                <rect key="frame" x="18" y="11" width="376" height="19"/>
+                                <rect key="frame" x="18" y="11" width="362" height="19"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="372" id="92q-gz-Uha"/>
+                                    <constraint firstAttribute="width" constant="358" id="92q-gz-Uha"/>
                                     <constraint firstAttribute="height" constant="15" id="s3V-q6-rPf"/>
                                 </constraints>
                                 <sliderCell key="cell" state="on" alignment="left" minValue="10" maxValue="100" doubleValue="30" tickMarkPosition="above" sliderType="linear" id="lru-E0-UEK"/>
@@ -738,19 +738,8 @@
                                     <action selector="speedSliderAction:" target="XfG-lQ-9wD" id="pEd-kD-yyB"/>
                                 </connections>
                             </slider>
-                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-yb-O3e">
-                                <rect key="frame" x="18" y="59" width="376" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="N0k-53-DUK"/>
-                                    <constraint firstAttribute="width" constant="372" id="Zzo-vi-7cN"/>
-                                </constraints>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="2Zv-YR-ozy"/>
-                                <connections>
-                                    <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="46t-R5-gbP"/>
-                                </connections>
-                            </slider>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-LR-bob">
-                                <rect key="frame" x="407" y="3" width="66" height="32"/>
+                                <rect key="frame" x="400" y="3" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="u5r-Ux-1mQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -759,21 +748,67 @@
                                     <action selector="quitButton:" target="XfG-lQ-9wD" id="nbm-SE-QJD"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8n2-2I-Wvp">
+                                <rect key="frame" x="384" y="40" width="98" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="d73-Np-8n0"/>
+                                    <constraint firstAttribute="height" constant="33" id="p3L-w0-57v"/>
+                                </constraints>
+                                <buttonCell key="cell" type="check" title="Mouse click" bezelStyle="regularSquare" imagePosition="below" alignment="center" state="on" inset="2" id="Hq2-QE-T9K">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickButton:" target="XfG-lQ-9wD" id="4LC-Vb-KZe"/>
+                                </connections>
+                            </button>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8F-Ia-ztb">
+                                <rect key="frame" x="339" y="81" width="133" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="CMv-g0-biK"/>
+                                    <constraint firstAttribute="height" constant="21" id="CPl-ey-kJB"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GdZ-qt-eFu" id="HuP-tI-y1l">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="QAE-Wa-tMg">
+                                        <items>
+                                            <menuItem title="Smile to click" keyEquivalent="1" id="GdZ-qt-eFu"/>
+                                            <menuItem title="Left eye to click" state="on" keyEquivalent="2" id="jG7-0t-rPr"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-yb-O3e">
+                                <rect key="frame" x="18" y="59" width="362" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="N0k-53-DUK"/>
+                                    <constraint firstAttribute="width" constant="358" id="Zzo-vi-7cN"/>
+                                </constraints>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="2Zv-YR-ozy"/>
+                                <connections>
+                                    <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="46t-R5-gbP"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <constraints>
                             <constraint firstItem="6Um-x8-CUf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="4KA-t2-Nre"/>
                             <constraint firstItem="85o-Ka-aGA" firstAttribute="top" secondItem="oFL-yb-O3e" secondAttribute="bottom" constant="8" id="6E3-sb-j03"/>
+                            <constraint firstItem="mCY-LR-bob" firstAttribute="top" secondItem="8n2-2I-Wvp" secondAttribute="bottom" constant="11" id="6S7-qx-dkE"/>
                             <constraint firstAttribute="trailing" secondItem="RDX-9s-wyg" secondAttribute="trailing" constant="360" id="6oA-5f-0lT"/>
+                            <constraint firstItem="8n2-2I-Wvp" firstAttribute="top" secondItem="F8F-Ia-ztb" secondAttribute="bottom" constant="9" id="Aki-43-DNv"/>
                             <constraint firstItem="RDX-9s-wyg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="AyD-gW-bq1"/>
                             <constraint firstItem="wla-eD-Cp1" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="ChW-fN-7Pg"/>
                             <constraint firstItem="mCY-LR-bob" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="Fbt-jQ-77s"/>
                             <constraint firstAttribute="trailing" secondItem="85o-Ka-aGA" secondAttribute="trailing" constant="378" id="HHf-F3-wJW"/>
                             <constraint firstAttribute="bottom" secondItem="mCY-LR-bob" secondAttribute="bottom" constant="10" id="U0k-aX-NLQ"/>
                             <constraint firstItem="6Um-x8-CUf" firstAttribute="top" secondItem="85o-Ka-aGA" secondAttribute="bottom" constant="8" id="UWh-pR-ba4"/>
-                            <constraint firstAttribute="trailing" secondItem="mCY-LR-bob" secondAttribute="trailing" constant="13" id="V31-c7-Obf"/>
+                            <constraint firstAttribute="trailing" secondItem="mCY-LR-bob" secondAttribute="trailing" constant="20" id="V31-c7-Obf"/>
                             <constraint firstItem="58H-3Q-R24" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="X7u-tD-cBO"/>
+                            <constraint firstAttribute="trailing" secondItem="8n2-2I-Wvp" secondAttribute="trailing" id="Zf3-Oo-ve9"/>
                             <constraint firstAttribute="bottom" secondItem="6Um-x8-CUf" secondAttribute="bottom" constant="13" id="a8T-hb-QWH"/>
                             <constraint firstItem="oFL-yb-O3e" firstAttribute="top" secondItem="wla-eD-Cp1" secondAttribute="bottom" constant="28" id="dGo-kZ-dZ6"/>
+                            <constraint firstAttribute="trailing" secondItem="F8F-Ia-ztb" secondAttribute="trailing" constant="11" id="gx7-UG-kiQ"/>
                             <constraint firstItem="oFL-yb-O3e" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="jSb-X4-YU0"/>
                             <constraint firstItem="85o-Ka-aGA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="pn3-ki-2BQ"/>
                             <constraint firstItem="oFL-yb-O3e" firstAttribute="top" secondItem="RDX-9s-wyg" secondAttribute="bottom" constant="5" id="wgc-9D-50I"/>
@@ -782,6 +817,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonText" destination="wla-eD-Cp1" id="aFX-dX-xxt"/>
+                        <outlet property="click" destination="8n2-2I-Wvp" id="fAa-Qs-ZjI"/>
                         <outlet property="label" destination="58H-3Q-R24" id="XRY-BZ-7Fd"/>
                         <outlet property="sensitivitySlider" destination="oFL-yb-O3e" id="jIp-bR-B91"/>
                         <outlet property="speedSlider" destination="6Um-x8-CUf" id="jSs-0K-mNX"/>
@@ -789,45 +825,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Nej-Kk-DVX">
-            <objects>
-                <viewController id="fGe-6F-g99" sceneMemberID="viewController">
-                    <view key="view" id="Zq7-Jr-Ev4">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJT-qJ-tJY">
-                                <rect key="frame" x="20" y="4" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="30F-i8-rZg">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1n-jF-L7e">
-                                <rect key="frame" x="20" y="42" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oqs-dj-x8d">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ay5-jX-E3M">
-                                <rect key="frame" x="20" y="81" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mCs-q8-l7P">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                        </subviews>
-                    </view>
-                </viewController>
-                <customObject id="n84-Gn-89v" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="452" y="580"/>
         </scene>
     </scenes>
 </document>

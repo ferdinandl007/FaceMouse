@@ -67,9 +67,16 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     //  this sets the initial position of the mouse
     fileprivate var  mouseLocation = CGPoint(x: 655.927419354839, y: 655.927419354839)
     
+    fileprivate var canClikc = true
     
+    // saving screen size in this var
+    fileprivate var rect = CGRect()
+    
+    fileprivate var faceIDs = [Int32]()
+    
+    
+    fileprivate var ispause = false
 
-    
     
     //  this method is called when the class is initialised
     override init() {
@@ -79,17 +86,18 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         self.captureSetup()
         
         //   initialising the face detection options as a dictionary
-        var faceDetectorOptions : [String : AnyObject]?
+        var faceDetectorOptions : [String : Any]?
         
         //  assigning faceDetectorOptions to set the accuracy high
-        faceDetectorOptions = [CIDetectorAccuracy : CIDetectorAccuracyHigh as AnyObject]
+        faceDetectorOptions = [CIDetectorAccuracy: CIDetectorAccuracyHigh,
+                               CIDetectorTracking: true]
         
         // Initialising the CI detector  to detect faces with  options said to high accuracy
         self.faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: faceDetectorOptions)
         
         //  get screen size and places them asking the centre  of the screen  For start-up
         if let screen = NSScreen.main {
-            let rect = screen.frame
+            rect = screen.frame
             mouseLocation = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
         }
     }
@@ -197,7 +205,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let ciImage = CIImage(cvImageBuffer: pixelBuffer!, options: attachments as! [String : Any]?)
     
         //  setting up the options  for the  CI detector
-        let options: [String : Any] = [CIDetectorImageOrientation: 1, CIDetectorSmile: true, CIDetectorEyeBlink: true]
+        let options: [String : Any] = [CIDetectorImageOrientation: 1, CIDetectorSmile: true, CIDetectorEyeBlink: true, CIDetectorTracking: true]
     
         //  assign an instance of CIdetector to allFeatures and initialise with the CIimage as well as the options
         let allFeatures = self.faceDetector?.features(in: ciImage, options: options)
@@ -207,22 +215,37 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     }
     
-
+    
+    var bool1 = true
+    var bool2 = false
+    var timer =  Timer()
     // function to move mouse
     fileprivate func mouse(position: CGPoint ,faceFeature: CIFaceFeature){
     
        
        //  determines if the mouse is meant to be moved or to ignore
         if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.calibrationData[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.calibrationData[1] * fabs(sensitivity - 1)) {
+            
             // This calculates the Delta on the face to the true centre  and then  applies a corresponding vector to the mouse.
-            mouseLocation = CGPoint(x: mouseLocation.x + ((((trueCentre.x - position.x)) / trueCentre.x) * speed), y: mouseLocation.y + (((trueCentre.y - position.y)) / trueCentre.y) * speed)
+            let new = CGPoint(x: mouseLocation.x + ((((trueCentre.x - position.x)) / trueCentre.x) * speed), y: mouseLocation.y + (((trueCentre.y - position.y)) / trueCentre.y) * speed)
+            
+            // checking your ex compliment is out of reach of display
+            if new.x > 0 && new.x < rect.maxX  {
+                 mouseLocation.x = new.x
+            }
+            // checking why component is out of reach of display
+            if new.y > 0 && new.y < rect.maxY  {
+                mouseLocation.y = new.y
+            }
+            
+            if !ispause {
             let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
             c?.post(tap: .cgSessionEventTap )
-        
+            }
        }
 
-        // Checks if  a smile is equal to  the user's smile 3
-        if self.isSmile == faceFeature.hasSmile {
+        // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
+        if self.isSmile == faceFeature.hasSmile && canClikc {
             
             if self.isSmile {
                 
@@ -231,23 +254,20 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             
 
                 //  checks if the right is closed to do a double to click
-                if faceFeature.rightEyeClosed {
+                if faceFeature.rightEyeClosed && !ispause {
                     
                     let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation , mouseButton: .left)
-                    
                     x?.setIntegerValueField(.mouseEventClickState, value: 2)
                     x?.post(tap: .cgSessionEventTap )
                     print("Triple Click")
                     
                 } else if faceFeature.leftEyeClosed { //  if left eyes closed moves master centre of the screen
-                   
-                        if let screen = NSScreen.main {
-                            let rect = screen.frame
-                             mouseLocation = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
-                            let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
-                            c?.post(tap: .cgSessionEventTap )
-                        }
 
+                    
+                    ispause = !ispause
+                    
+                    
+                
                 } else {
                     //   used for single click
                     let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
@@ -260,17 +280,24 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 // sets isSmile to false
                 self.isSmile = true
                 //  releases left mouse button
-                let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: mouseLocation, mouseButton: .left)
-                x?.post(tap: .cgSessionEventTap )
+                if !ispause {
+                    let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: mouseLocation, mouseButton: .left)
+                    x?.post(tap: .cgSessionEventTap )
+                }
+               
             }
         }
         
         
         
     }
-        
     
- 
+   
+    
+    @objc fileprivate func stopTimer(){
+        bool2 = true
+        bool1 = true
+    }
         
     fileprivate func faceDetection(){
         
@@ -287,12 +314,18 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 //   if allfeatures is not equal to nil. if yes assign allfeatures to features otherwise return
                 guard let features = self.allFeatures(sample: sample) else { return }
                 
+                
+                for face in features {
+                     if let faceID = face as? CIFaceFeature {
+                        self.faceIDs.append(faceID.trackingID)
+                    }
+                }
+                
                 // loop to cycle through all features
                 for  feature in features {
-                    
+                   
                     // checks if the feature is a CIFaceFeature if yes assign feature to face feature and go on.
                     if let faceFeature = feature as? CIFaceFeature {
-                        
                         // To check every calibration is needed
                         if !self.hasEnded {
                             //  check if enough data has been captured
@@ -315,7 +348,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                 //  calculating the true centre of the mouse by taking the average of all captured coordinates
                                 self.trueCentre = CGPoint(x: self.calX.average, y: self.calY.average)
                                 print("trueCentre = ",self.trueCentre)
-                                
+                               
                                 self.hasEnded = true
                             } else {
                                 //  add capture data to X and Y
@@ -324,8 +357,12 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                             }
                             
                         } else {
-                            // update mouse position
-                            self.mouse(position: faceFeature.mouthPosition, faceFeature: faceFeature)
+                            // to check that we are tracking the correct face
+                            if faceFeature.trackingID == self.faceIDs.min() {
+                                  // update mouse position
+                                self.mouse(position: faceFeature.mouthPosition, faceFeature: faceFeature)
+                                self.faceIDs.removeAll()
+                            }
                         }
                     }
                 }
@@ -349,6 +386,10 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         speed = CGFloat(speeds)
         sensitivity = CGFloat(sensitivityint)
         
+    }
+    
+    public func setCanClick(click: Bool){
+        canClikc = click
     }
 
     
@@ -398,6 +439,10 @@ class Camara: NSView {
     
     public func setSpeed(sensitivityint: Float,speed: Int) {
         camaraRec.setSensitivity(sensitivityint: sensitivityint, speeds: speed)
+    }
+    
+    public func setCanClick(click: Bool){
+        camaraRec.setCanClick(click: click)
     }
     
     required init?(coder aDecoder: NSCoder) {
