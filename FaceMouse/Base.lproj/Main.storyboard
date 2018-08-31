@@ -768,16 +768,20 @@
                                     <constraint firstAttribute="width" constant="128" id="CMv-g0-biK"/>
                                     <constraint firstAttribute="height" constant="21" id="CPl-ey-kJB"/>
                                 </constraints>
-                                <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GdZ-qt-eFu" id="HuP-tI-y1l">
+                                <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GdZ-qt-eFu" id="HuP-tI-y1l">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="QAE-Wa-tMg">
                                         <items>
-                                            <menuItem title="Smile to click" keyEquivalent="1" id="GdZ-qt-eFu"/>
-                                            <menuItem title="Left eye to click" state="on" keyEquivalent="2" id="jG7-0t-rPr"/>
+                                            <menuItem title="Smile to click" state="on" keyEquivalent="1" id="GdZ-qt-eFu"/>
+                                            <menuItem title="Left eye to click" keyEquivalent="2" id="jG7-0t-rPr"/>
+                                            <menuItem title="Right eye to click" keyEquivalent="3" id="faf-co-d2w"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="selectionButton:" target="XfG-lQ-9wD" id="GTx-P8-xaJ"/>
+                                </connections>
                             </popUpButton>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-yb-O3e">
                                 <rect key="frame" x="18" y="59" width="362" height="24"/>
@@ -819,6 +823,7 @@
                         <outlet property="buttonText" destination="wla-eD-Cp1" id="aFX-dX-xxt"/>
                         <outlet property="click" destination="8n2-2I-Wvp" id="fAa-Qs-ZjI"/>
                         <outlet property="label" destination="58H-3Q-R24" id="XRY-BZ-7Fd"/>
+                        <outlet property="selection" destination="F8F-Ia-ztb" id="vQ5-gT-az9"/>
                         <outlet property="sensitivitySlider" destination="oFL-yb-O3e" id="jIp-bR-B91"/>
                         <outlet property="speedSlider" destination="6Um-x8-CUf" id="jSs-0K-mNX"/>
                     </connections>

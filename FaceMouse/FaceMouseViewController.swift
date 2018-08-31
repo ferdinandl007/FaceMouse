@@ -19,6 +19,7 @@ class FaceMouseViewController: NSViewController {
     @IBOutlet weak var buttonText: NSButton!
     @IBOutlet weak var click: NSButton!
     private var timer: Timer!
+    @IBOutlet weak var selection: NSPopUpButton!
     
     
     
@@ -44,6 +45,9 @@ class FaceMouseViewController: NSViewController {
         camara.setCanClick(click: Bool(truncating: click.state.rawValue as NSNumber))
     }
     
+    @IBAction func selectionButton(_ sender: Any) {
+        camara.setSelection(select: selection.indexOfSelectedItem)
+    }
     
     @IBAction func sensitivitySliderAction(_ sender: Any) {
         let value =  sensitivitySlider.floatValue

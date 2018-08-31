@@ -8,9 +8,15 @@
 
 import Foundation
 
+import SceneKit
+
+
+
 extension Array where Element: Numeric {
     /// Returns the total sum of all elements in the array
     var total: Element { return reduce(0, +) }
+
+   
 }
 
 extension Array where Element: BinaryInteger {
