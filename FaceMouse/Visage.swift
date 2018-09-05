@@ -265,36 +265,34 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate func smile(faceFeature: CIFaceFeature) {
         // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
         
-        if self.isSmile == faceFeature.hasSmile && canClikc {
+        if faceFeature.hasSmile && canClikc {
+            if lastSmile == nil {
+                lastSmile = Date()
+            }
             
-            if self.isSmile {
-    
-                //  set isSmile to false
-                self.isSmile = false
-                //  checks if the right is closed to do a double to click
-                if faceFeature.rightEyeClosed && !ispause {
-                    
-                    let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation , mouseButton: .left)
-                    x?.setIntegerValueField(.mouseEventClickState, value: 2)
-                    x?.post(tap: .cgSessionEventTap )
-                    print("Triple Click")
-                } else  {
-                    //   used for single click
-                    let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
-                    x?.post(tap: .cgSessionEventTap )
-                    
-                }
+            if time(time: lastSmile, delay: 0.3) {
+                lastSmile = Date()
+                let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
+                x?.post(tap: .cgSessionEventTap )
+                print("click")
                 
-                // otherwise
-            } else {
-                // sets isSmile to false
-                self.isSmile = true
-                //  releases left mouse button
-                if !ispause {
-                    let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: mouseLocation, mouseButton: .left)
-                    x?.post(tap: .cgSessionEventTap )
-                }
                 
+                let y = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: mouseLocation, mouseButton: .left)
+                y?.post(tap: .cgSessionEventTap )
+                
+            }
+            
+        } else {
+            lastSmile = nil
+        }
+        
+        if faceFeature.hasSmile && faceFeature.leftEyeClosed {
+            if lastLeftEyeBlink == nil {
+                lastLeftEyeBlink = Date()
+            }
+            
+            if time(time: lastLeftEyeBlink, delay: 2) {
+                ispause = !ispause
             }
         }
     }
@@ -303,7 +301,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate func time(time: Date? , delay: Double) -> Bool {
         guard let lastBlink = time else { return false }
         
-      let t = Date().timeIntervalSince(lastBlink)
+        let t = Date().timeIntervalSince(lastBlink)
  
         if t > delay {
             return true
