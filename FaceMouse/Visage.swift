@@ -77,8 +77,11 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate var ispause = false
     
     fileprivate var selection = 0
-
     
+    fileprivate var lastRightEyeBlink: Date?
+    fileprivate var lastLeftEyeBlink: Date?
+    fileprivate var lastSmile: Date?
+ 
     //  this method is called when the class is initialised
     override init() {
         super.init()
@@ -224,7 +227,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             // This calculates the Delta on the face to the true centre  and then  applies a corresponding vector to the mouse.
             let new = CGPoint(x: mouseLocation.x + (((trueCentre.x - position.x) / trueCentre.x) * speed), y: mouseLocation.y + ((trueCentre.y - position.y) / trueCentre.y) * speed)
             
-            print((trueCentre.x - position.x) / trueCentre.x)
+           
             
             // checking your ex compliment is out of reach of display
             if new.x > 0 && new.x < rect.maxX  {
@@ -245,7 +248,6 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     fileprivate func mouse(position: CGPoint ,faceFeature: CIFaceFeature){
     
-       
         extractedFunc(position)
 
         switch selection {
@@ -262,6 +264,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     fileprivate func smile(faceFeature: CIFaceFeature) {
         // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
+        
         if self.isSmile == faceFeature.hasSmile && canClikc {
             
             if self.isSmile {
@@ -275,10 +278,6 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     x?.setIntegerValueField(.mouseEventClickState, value: 2)
                     x?.post(tap: .cgSessionEventTap )
                     print("Triple Click")
-                    
-                } else if faceFeature.leftEyeClosed { //  if left eyes closed moves master centre of the screen
-                    ispause = !ispause
-                    
                 } else  {
                     //   used for single click
                     let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
@@ -299,35 +298,50 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
     }
+
     
-    
-    var timer = Timer()
-    var bool = true
-   private var bool1 = true
-    
-    fileprivate func EyeClosed(faceFeature: CIFaceFeature) {
-        // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
-        if faceFeature.rightEyeClosed && !faceFeature.leftEyeClosed && canClikc {
-            if bool {
-                 print("EyeClosed")
-                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(all), userInfo: nil, repeats: false)
-                bool = false
-            }
-            
+    fileprivate func time(time: Date? , delay: Double) -> Bool {
+        guard let lastBlink = time else { return false }
+        
+      let t = Date().timeIntervalSince(lastBlink)
+ 
+        if t > delay {
+            return true
         } else {
-//            timer.invalidate()
+            return false
+        }
+    }
+    
+   
+    fileprivate func EyeClosed(faceFeature: CIFaceFeature) {
+//         Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
+        if faceFeature.rightEyeClosed && !faceFeature.leftEyeClosed && canClikc {
+            if lastRightEyeBlink == nil {
+                lastRightEyeBlink = Date()
+            }
+            lastLeftEyeBlink = nil
+            if time(time: lastRightEyeBlink, delay: 0.3) {
+                lastRightEyeBlink = Date()
+                let x = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition:  mouseLocation, mouseButton: .left)
+                x?.post(tap: .cgSessionEventTap )
+                print("click")
+                
+           
+                let y = CGEvent.init(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: mouseLocation, mouseButton: .left)
+                y?.post(tap: .cgSessionEventTap )
+            }
+          
+
+        } else {
+            lastRightEyeBlink = nil
         }
         
-        
-        
-  
     }
     
-    @objc func all() {
-        bool = true
-        print("yes!!!")
-    }
-        
+    
+  
+    
+    
     fileprivate func faceDetection(){
         
         let group = DispatchGroup()

@@ -826,10 +826,97 @@
                         <outlet property="selection" destination="F8F-Ia-ztb" id="vQ5-gT-az9"/>
                         <outlet property="sensitivitySlider" destination="oFL-yb-O3e" id="jIp-bR-B91"/>
                         <outlet property="speedSlider" destination="6Um-x8-CUf" id="jSs-0K-mNX"/>
+                        <segue destination="24w-vA-gUk" kind="show" identifier="bob" id="zFe-vW-zde"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-22" y="657"/>
+        </scene>
+        <!--Tutorials View-->
+        <scene sceneID="Hzu-yt-H5m">
+            <objects>
+                <viewController id="24w-vA-gUk" customClass="TutorialsView" customModule="FaceMouse" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="smf-XG-kMr">
+                        <rect key="frame" x="0.0" y="0.0" width="1095" height="654"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="DYk-is-e4n" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="1095" height="654"/>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
+                                <rect key="frame" x="57" y="0.0" width="974" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKo-7I-p5t">
+                                        <rect key="frame" x="34" y="19" width="362" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" minValue="10" maxValue="100" doubleValue="30" tickMarkPosition="above" sliderType="linear" id="sah-OL-3pv"/>
+                                        <connections>
+                                            <action selector="speedSliderAction:" target="XfG-lQ-9wD" id="Lnf-se-M1m"/>
+                                        </connections>
+                                    </slider>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-yt-Wfk">
+                                        <rect key="frame" x="435" y="55" width="104" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sensitivity slider" id="OoJ-fV-ZTz">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgv-LB-fS4">
+                                        <rect key="frame" x="435" y="22" width="362" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="0fg-gX-RmX"/>
+                                        <connections>
+                                            <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="83Z-eF-uEi"/>
+                                        </connections>
+                                    </slider>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-WD-mqy">
+                                        <rect key="frame" x="34" y="55" width="86" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mouse speed" id="QSW-z7-7oB">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKK-l6-OZR">
+                                        <rect key="frame" x="824" y="22" width="133" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Dq-yr-xCk" id="qNe-Jh-vag">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="lbO-CH-0b4">
+                                                <items>
+                                                    <menuItem title="Smile to click" state="on" keyEquivalent="1" id="4Dq-yr-xCk"/>
+                                                    <menuItem title="Left eye to click" keyEquivalent="2" id="YJG-A2-DbW"/>
+                                                    <menuItem title="Right eye to click" keyEquivalent="3" id="53u-20-6jR"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="selectionButton:" target="XfG-lQ-9wD" id="XaI-e5-moE"/>
+                                        </connections>
+                                    </popUpButton>
+                                </subviews>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="DYk-is-e4n" firstAttribute="top" secondItem="smf-XG-kMr" secondAttribute="top" id="Rhb-rQ-OPD"/>
+                            <constraint firstAttribute="bottom" secondItem="DYk-is-e4n" secondAttribute="bottom" id="fzA-gk-rQw"/>
+                            <constraint firstItem="DYk-is-e4n" firstAttribute="leading" secondItem="smf-XG-kMr" secondAttribute="leading" id="xAu-QV-Sdw"/>
+                            <constraint firstAttribute="trailing" secondItem="DYk-is-e4n" secondAttribute="trailing" id="xuI-5z-hXP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sView" destination="1RB-0F-1b3" id="IgM-YW-X30"/>
+                        <outlet property="sceneView" destination="DYk-is-e4n" id="6fC-e8-5sV"/>
+                    </connections>
+                </viewController>
+                <customObject id="OHo-8s-QVk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957.5" y="760"/>
         </scene>
     </scenes>
 </document>

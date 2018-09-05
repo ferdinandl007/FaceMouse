@@ -37,6 +37,7 @@ class FaceMouseViewController: NSViewController {
         speedSlider.integerValue = getSpeed()
         sensitivitySlider.floatValue = getSensitivity()
         label.stringValue = "When pressing the start button try to look in the centre of the screen for about 4 seconds"
+        //self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "bob"), sender: nil)
         
     }
 
@@ -82,6 +83,7 @@ class FaceMouseViewController: NSViewController {
             self.camara.faceTracking(yes: true)
             self.buttonText.title = "Stop"
             self.hasFaceTracking = false
+            self.view.layer?.contents = camara.layer?.contents
             
         
         } else {
