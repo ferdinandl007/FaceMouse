@@ -18,7 +18,6 @@
 		CF62D407213E437500A4DD63 /* TutorialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62D405213E437500A4DD63 /* TutorialsView.swift */; };
 		CF62D408213E437500A4DD63 /* TutorialsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF62D406213E437500A4DD63 /* TutorialsView.xib */; };
 		CF62D446213E469500A4DD63 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62D445213E469500A4DD63 /* Scene.swift */; };
-		CF62D486213E786000A4DD63 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CF62D485213E786000A4DD63 /* GameScene.sks */; };
 		CF77D09120D6BFC500C494FC /* FaceMouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */; };
 		CF79DF5120DCF921009A8B7A /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF79DF4F20DCF921009A8B7A /* ButtonViewController.swift */; };
 		CF79DF5220DCF921009A8B7A /* ButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF79DF5020DCF921009A8B7A /* ButtonViewController.xib */; };
@@ -60,7 +59,6 @@
 		CF62D405213E437500A4DD63 /* TutorialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialsView.swift; sourceTree = "<group>"; };
 		CF62D406213E437500A4DD63 /* TutorialsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialsView.xib; sourceTree = "<group>"; };
 		CF62D445213E469500A4DD63 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
-		CF62D485213E786000A4DD63 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMouseViewController.swift; sourceTree = "<group>"; };
 		CF79DF4F20DCF921009A8B7A /* ButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		CF79DF5020DCF921009A8B7A /* ButtonViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonViewController.xib; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 				CF51119D20D7F06A002B7E2F /* extensions.swift */,
 				CF62D445213E469500A4DD63 /* Scene.swift */,
 				CF62D405213E437500A4DD63 /* TutorialsView.swift */,
-				CF62D485213E786000A4DD63 /* GameScene.sks */,
 				CF62D406213E437500A4DD63 /* TutorialsView.xib */,
 				CF77D09020D6BFC500C494FC /* FaceMouseViewController.swift */,
 				CF79DF4F20DCF921009A8B7A /* ButtonViewController.swift */,
@@ -261,7 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF62D408213E437500A4DD63 /* TutorialsView.xib in Resources */,
-				CF62D486213E786000A4DD63 /* GameScene.sks in Resources */,
 				CF79DF5220DCF921009A8B7A /* ButtonViewController.xib in Resources */,
 				CF0D316820D66A2C00B130B0 /* Assets.xcassets in Resources */,
 				CF0D316B20D66A2C00B130B0 /* Main.storyboard in Resources */,

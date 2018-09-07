@@ -12,7 +12,15 @@ import AVFoundation
 import CoreGraphics
 import Vision
 
+protocol VisageDelegate: class {
+    func mouseDidMove(position: CGPoint)
+    func faceDidSmile(faceFeature: CIFaceFeature)
+    
+}
+
 public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    weak var delegate: VisageDelegate?
     
     // set up the size of the camera view  and initialise as NSView
     fileprivate var visageCameraView = NSView(frame: NSRect(x: 0.0, y: 0.0, width: 640.0, height: 480.0))
@@ -219,15 +227,15 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     }
     
-    // function to move mouse with Delta
-    fileprivate func extractedFunc(_ position: CGPoint) {
+
+    func mouseWillMoveTo(position: CGPoint) {
         //  determines if the mouse is meant to be moved or to ignore
         if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.calibrationData[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.calibrationData[1] * fabs(sensitivity - 1)) {
             
             // This calculates the Delta on the face to the true centre  and then  applies a corresponding vector to the mouse.
             let new = CGPoint(x: mouseLocation.x + (((trueCentre.x - position.x) / trueCentre.x) * speed), y: mouseLocation.y + ((trueCentre.y - position.y) / trueCentre.y) * speed)
             
-           
+            
             
             // checking your ex compliment is out of reach of display
             if new.x > 0 && new.x < rect.maxX  {
@@ -239,30 +247,24 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             
             if !ispause {
+                
                 let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
-                c?.post(tap: .cgSessionEventTap )
+                c?.post(tap: .cgSessionEventTap)
+                print("hi")
             }
         }
     }
     
+     func mouseDidMove(position: CGPoint){
     
-    fileprivate func mouse(position: CGPoint ,faceFeature: CIFaceFeature){
-    
-        extractedFunc(position)
+       delegate?.mouseDidMove(position: position)
 
-        switch selection {
-        case 1:
-            EyeClosed(faceFeature: faceFeature)
-        default:
-            smile(faceFeature: faceFeature)
-        }
-        
     }
     
     
     
     
-    fileprivate func smile(faceFeature: CIFaceFeature) {
+     func faceDidSmile(faceFeature: CIFaceFeature) {
         // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
         
         if faceFeature.hasSmile && canClikc {
@@ -286,15 +288,15 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             lastSmile = nil
         }
         
-        if faceFeature.hasSmile && faceFeature.leftEyeClosed {
-            if lastLeftEyeBlink == nil {
-                lastLeftEyeBlink = Date()
-            }
-            
-            if time(time: lastLeftEyeBlink, delay: 2) {
-                ispause = !ispause
-            }
-        }
+//        if faceFeature.hasSmile && faceFeature.leftEyeClosed {
+//            if lastLeftEyeBlink == nil {
+//                lastLeftEyeBlink = Date()
+//            }
+//
+//            if time(time: lastLeftEyeBlink, delay: 2) {
+//                ispause = !ispause
+//            }
+//        }
     }
 
     
@@ -401,7 +403,15 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                             // to check that we are tracking the correct face
                             if faceFeature.trackingID == self.faceIDs.min() {
                                   // update mouse position
-                                self.mouse(position: faceFeature.mouthPosition, faceFeature: faceFeature)
+                                self.delegate?.mouseDidMove(position: faceFeature.mouthPosition)
+                                
+                                switch self.selection {
+                                case 1:
+                                    self.EyeClosed(faceFeature: faceFeature)
+                                default:
+                                    self.faceDidSmile(faceFeature: faceFeature)
+                                }
+                                
                                 self.faceIDs.removeAll()
                             }
                         }
@@ -441,7 +451,10 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 }// end of class
 
 
-class Camara: NSView {
+class Camara: NSView , VisageDelegate{
+    
+    
+    
     
     // initialising the NSView
     fileprivate let camara = NSView()
@@ -464,6 +477,9 @@ class Camara: NSView {
         //  initialising the Visage class
         camaraRec = Visage()
         
+        camaraRec.delegate = self
+    
+        
 //        faceTracking(yes: true)
         
         
@@ -472,6 +488,14 @@ class Camara: NSView {
         
         //  this will  add our life camera view (cameraView) and will add it as a subview to are class
         self.addSubview(cameraView)
+    }
+    
+    func mouseDidMove(position: CGPoint) {
+        camaraRec.mouseWillMoveTo(position: position)
+    }
+    
+    func faceDidSmile(faceFeature: CIFaceFeature) {
+        
     }
     
      //  starts the camera view and  face tracking

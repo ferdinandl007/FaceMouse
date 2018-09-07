@@ -840,66 +840,127 @@
                         <rect key="frame" x="0.0" y="0.0" width="1095" height="654"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="DYk-is-e4n" customClass="SKView">
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYk-is-e4n" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="1095" height="654"/>
-                            </customView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
-                                <rect key="frame" x="57" y="0.0" width="974" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKo-7I-p5t">
-                                        <rect key="frame" x="34" y="19" width="362" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" minValue="10" maxValue="100" doubleValue="30" tickMarkPosition="above" sliderType="linear" id="sah-OL-3pv"/>
-                                        <connections>
-                                            <action selector="speedSliderAction:" target="XfG-lQ-9wD" id="Lnf-se-M1m"/>
-                                        </connections>
-                                    </slider>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-yt-Wfk">
-                                        <rect key="frame" x="435" y="55" width="104" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sensitivity slider" id="OoJ-fV-ZTz">
+                                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="htE-87-YDH">
+                                        <rect key="frame" x="64" y="303" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="0Wa-D2-a8P"/>
+                                            <constraint firstAttribute="height" constant="48" id="Xpu-7z-5Cp"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Combined Shape" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="E7m-Ug-Ecc">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        </buttonCell>
+                                    </button>
+                                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NlY-5A-ff2">
+                                        <rect key="frame" x="983" y="303" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="TrR-TY-2yl"/>
+                                            <constraint firstAttribute="width" constant="48" id="xFm-KY-tYJ"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Combined Shape-1" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ktN-r1-n6L">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
+                                        <rect key="frame" x="64" y="0.0" width="967" height="85"/>
+                                        <subviews>
+                                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lKo-7I-p5t">
+                                                <rect key="frame" x="34" y="19" width="362" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="gJa-d9-Wyg"/>
+                                                </constraints>
+                                                <sliderCell key="cell" state="on" alignment="left" minValue="10" maxValue="100" doubleValue="30" tickMarkPosition="above" sliderType="linear" id="sah-OL-3pv"/>
+                                                <connections>
+                                                    <action selector="speedSliderAction:" target="XfG-lQ-9wD" id="Lnf-se-M1m"/>
+                                                </connections>
+                                            </slider>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-yt-Wfk">
+                                                <rect key="frame" x="435" y="55" width="104" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sensitivity slider" id="OoJ-fV-ZTz">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lgv-LB-fS4">
+                                                <rect key="frame" x="435" y="22" width="362" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="soR-Tx-6D7"/>
+                                                </constraints>
+                                                <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="0fg-gX-RmX"/>
+                                                <connections>
+                                                    <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="83Z-eF-uEi"/>
+                                                </connections>
+                                            </slider>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-WD-mqy">
+                                                <rect key="frame" x="34" y="55" width="86" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mouse speed" id="QSW-z7-7oB">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CKK-l6-OZR">
+                                                <rect key="frame" x="824" y="22" width="133" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="E3o-8X-bon"/>
+                                                    <constraint firstAttribute="width" constant="128" id="Kwa-Y0-88W"/>
+                                                </constraints>
+                                                <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Dq-yr-xCk" id="qNe-Jh-vag">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="lbO-CH-0b4">
+                                                        <items>
+                                                            <menuItem title="Smile to click" state="on" keyEquivalent="1" id="4Dq-yr-xCk"/>
+                                                            <menuItem title="Left eye to click" keyEquivalent="2" id="YJG-A2-DbW"/>
+                                                            <menuItem title="Right eye to click" keyEquivalent="3" id="53u-20-6jR"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="selectionButton:" target="XfG-lQ-9wD" id="XaI-e5-moE"/>
+                                                </connections>
+                                            </popUpButton>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="CKK-l6-OZR" firstAttribute="leading" secondItem="lgv-LB-fS4" secondAttribute="trailing" constant="31" id="702-oj-wZB"/>
+                                            <constraint firstAttribute="height" constant="85" id="8KP-HE-Un1"/>
+                                            <constraint firstItem="lKo-7I-p5t" firstAttribute="leading" secondItem="1RB-0F-1b3" secondAttribute="leading" constant="36" id="CDQ-LG-4pv"/>
+                                            <constraint firstItem="ypo-yt-Wfk" firstAttribute="baseline" secondItem="xN7-WD-mqy" secondAttribute="baseline" id="HGX-BU-kbE"/>
+                                            <constraint firstAttribute="bottom" secondItem="CKK-l6-OZR" secondAttribute="bottom" constant="25" id="Irl-Nl-2fd"/>
+                                            <constraint firstItem="ypo-yt-Wfk" firstAttribute="leading" secondItem="lgv-LB-fS4" secondAttribute="leading" id="Rcg-vq-7ms"/>
+                                            <constraint firstItem="ypo-yt-Wfk" firstAttribute="leading" secondItem="1RB-0F-1b3" secondAttribute="leading" constant="437" id="ULT-lp-syQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="lKo-7I-p5t" secondAttribute="bottom" constant="21" id="biF-DA-LYT"/>
+                                            <constraint firstAttribute="trailing" secondItem="CKK-l6-OZR" secondAttribute="trailing" constant="13" id="cOu-ae-DIh"/>
+                                            <constraint firstItem="lgv-LB-fS4" firstAttribute="leading" secondItem="lKo-7I-p5t" secondAttribute="trailing" constant="43" id="szv-x9-RGM"/>
+                                            <constraint firstItem="lgv-LB-fS4" firstAttribute="top" secondItem="ypo-yt-Wfk" secondAttribute="bottom" constant="9" id="uWV-kx-FFa"/>
+                                            <constraint firstAttribute="bottom" secondItem="lgv-LB-fS4" secondAttribute="bottom" constant="24" id="uaK-F2-po2"/>
+                                            <constraint firstItem="lKo-7I-p5t" firstAttribute="top" secondItem="xN7-WD-mqy" secondAttribute="bottom" constant="19" id="yFA-XB-gsr"/>
+                                        </constraints>
+                                    </customView>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-gZ-y6B">
+                                        <rect key="frame" x="302" y="250" width="491" height="154"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="iuH-pd-zO9">
+                                            <font key="font" metaFont="system" size="35"/>
+                                            <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgv-LB-fS4">
-                                        <rect key="frame" x="435" y="22" width="362" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="0fg-gX-RmX"/>
-                                        <connections>
-                                            <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="83Z-eF-uEi"/>
-                                        </connections>
-                                    </slider>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-WD-mqy">
-                                        <rect key="frame" x="34" y="55" width="86" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mouse speed" id="QSW-z7-7oB">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKK-l6-OZR">
-                                        <rect key="frame" x="824" y="22" width="133" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Smile to click" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Dq-yr-xCk" id="qNe-Jh-vag">
-                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="lbO-CH-0b4">
-                                                <items>
-                                                    <menuItem title="Smile to click" state="on" keyEquivalent="1" id="4Dq-yr-xCk"/>
-                                                    <menuItem title="Left eye to click" keyEquivalent="2" id="YJG-A2-DbW"/>
-                                                    <menuItem title="Right eye to click" keyEquivalent="3" id="53u-20-6jR"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="selectionButton:" target="XfG-lQ-9wD" id="XaI-e5-moE"/>
-                                        </connections>
-                                    </popUpButton>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="htE-87-YDH" firstAttribute="centerY" secondItem="DYk-is-e4n" secondAttribute="centerY" id="9Kg-UN-SCc"/>
+                                    <constraint firstItem="1RB-0F-1b3" firstAttribute="leading" secondItem="DYk-is-e4n" secondAttribute="leading" constant="64" id="OzX-NU-gIa"/>
+                                    <constraint firstAttribute="trailing" secondItem="1RB-0F-1b3" secondAttribute="trailing" constant="64" id="U4K-Cg-dLt"/>
+                                    <constraint firstAttribute="trailing" secondItem="NlY-5A-ff2" secondAttribute="trailing" constant="64" id="mXf-M3-X48"/>
+                                    <constraint firstAttribute="bottom" secondItem="1RB-0F-1b3" secondAttribute="bottom" id="oJ7-pb-AtK"/>
+                                    <constraint firstItem="NlY-5A-ff2" firstAttribute="centerY" secondItem="DYk-is-e4n" secondAttribute="centerY" id="oPh-hl-4rv"/>
+                                    <constraint firstItem="htE-87-YDH" firstAttribute="leading" secondItem="DYk-is-e4n" secondAttribute="leading" constant="64" id="ozm-cu-pNJ"/>
+                                </constraints>
                             </customView>
                         </subviews>
                         <constraints>
@@ -910,6 +971,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="G9w-gZ-y6B" id="xrV-qo-82D"/>
                         <outlet property="sView" destination="1RB-0F-1b3" id="IgM-YW-X30"/>
                         <outlet property="sceneView" destination="DYk-is-e4n" id="6fC-e8-5sV"/>
                     </connections>
@@ -919,4 +981,8 @@
             <point key="canvasLocation" x="957.5" y="760"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Combined Shape" width="70" height="70"/>
+        <image name="Combined Shape-1" width="70" height="70"/>
+    </resources>
 </document>

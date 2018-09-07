@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+import Cocoa
 
 
 extension Array where Element: Numeric {
@@ -31,3 +31,24 @@ extension Array where Element: FloatingPoint {
         return isEmpty ? 0 : total / Element(count)
     }
 }
+
+
+extension NSView {
+    
+    var backgroundColor: NSColor? {
+        
+        get {
+            if let colorRef = self.layer?.backgroundColor {
+                return NSColor(cgColor: colorRef)
+            } else {
+                return nil
+            }
+        }
+        
+        set {
+            self.wantsLayer = true
+            self.layer?.backgroundColor = newValue?.cgColor
+        }
+    }
+}
+

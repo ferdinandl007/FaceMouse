@@ -13,6 +13,7 @@ class Scene: SKScene {
 
     override func didMove(to view: SKView) {
         print("miipp")
+    self.scene?.backgroundColor = NSColor(red: 247 / 255, green: 80 / 255, blue: 101 / 255, alpha: 1)
     }
     
     override func sceneDidLoad() {
