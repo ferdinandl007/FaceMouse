@@ -865,7 +865,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
+                                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
                                         <rect key="frame" x="64" y="0.0" width="967" height="85"/>
                                         <subviews>
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lKo-7I-p5t">
@@ -941,6 +941,10 @@
                                             <constraint firstAttribute="bottom" secondItem="lgv-LB-fS4" secondAttribute="bottom" constant="24" id="uaK-F2-po2"/>
                                             <constraint firstItem="lKo-7I-p5t" firstAttribute="top" secondItem="xN7-WD-mqy" secondAttribute="bottom" constant="19" id="yFA-XB-gsr"/>
                                         </constraints>
+                                        <shadow key="shadow" blurRadius="-1">
+                                            <size key="offset" width="0.0" height="-7"/>
+                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </shadow>
                                     </customView>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-gZ-y6B">
                                         <rect key="frame" x="302" y="250" width="491" height="154"/>
