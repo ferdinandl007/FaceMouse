@@ -9,9 +9,10 @@
 
 import SpriteKit
 import Cocoa
-import AVFoundation
 import CoreGraphics
 import Vision
+import SpriteKit
+import GameplayKit
 
 class TutorialsView: NSViewController {
 
@@ -21,20 +22,23 @@ class TutorialsView: NSViewController {
     @IBOutlet weak var label: NSTextField!
     
     
-    let visage = Visage()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            visage.delegate = self
         
-           visage.beginFaceDetection()
+           
             sView.backgroundColor = NSColor.white
             sView.layer?.cornerRadius = 30
             sView.layer?.maskedCorners = [.layerMaxXMaxYCorner,.layerMinXMaxYCorner]
+            sView.layer?.shadowRadius = 20
         
         // Get the SKScene from the loaded GKScene
-             let sceneNode = Scene()
+        if let scene = GKScene(fileNamed: "Scene") {
+            
+            // Get the SKScene from the loaded GKScene
+            if let sceneNode = scene.rootNode as! Scene? {
                 
                 // Copy gameplay related content over to the scene
                 
@@ -44,15 +48,12 @@ class TutorialsView: NSViewController {
                 // Present the scene
                 if let view = self.sceneView {
                     view.presentScene(sceneNode)
-    
-                    view.ignoresSiblingOrder = false
-                    view.showsFPS = false
-                    view.showsNodeCount = false
-                
-            
-
-        // Do view setup here.
-    }
+                    view.ignoresSiblingOrder = true
+                    view.showsFPS = true
+                    view.showsNodeCount = true
+                }
+            }
+        }
 }
     
     
@@ -64,22 +65,4 @@ class TutorialsView: NSViewController {
     
 }
 
-extension TutorialsView: VisageDelegate {
-    func EyeDidClosed(faceFeature: CIFaceFeature) {
-        
-    }
-    
-    
-    func mouseDidMove(position: CGPoint) {
-        visage.mouseWillMoveTo(position: position)
-    }
-    
-    func faceDidSmile(faceFeature: CIFaceFeature) {
-        print(faceFeature.hasSmile)
-    }
-    
-    
 
-    
-    
-}

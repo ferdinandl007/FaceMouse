@@ -37,7 +37,7 @@ class FaceMouseViewController: NSViewController {
         speedSlider.integerValue = getSpeed()
         sensitivitySlider.floatValue = getSensitivity()
         label.stringValue = "When pressing the start button try to look in the centre of the screen for about 4 seconds"
-        //self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "bob"), sender: nil)
+//        self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "bob"), sender: nil)
         
     }
 
