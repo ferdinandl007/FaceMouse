@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14295.6"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -843,7 +844,7 @@
                             <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYk-is-e4n" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="1095" height="654"/>
                                 <subviews>
-                                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="htE-87-YDH">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="htE-87-YDH">
                                         <rect key="frame" x="64" y="303" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="0Wa-D2-a8P"/>
@@ -853,8 +854,11 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="reitBButton:" target="24w-vA-gUk" id="8iR-RY-89k"/>
+                                        </connections>
                                     </button>
-                                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NlY-5A-ff2">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="NlY-5A-ff2">
                                         <rect key="frame" x="983" y="303" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="TrR-TY-2yl"/>
@@ -864,8 +868,11 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="laftButton:" target="24w-vA-gUk" id="0k6-dP-YmJ"/>
+                                        </connections>
                                     </button>
-                                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1RB-0F-1b3">
                                         <rect key="frame" x="64" y="0.0" width="967" height="85"/>
                                         <subviews>
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lKo-7I-p5t">
@@ -875,7 +882,7 @@
                                                 </constraints>
                                                 <sliderCell key="cell" state="on" alignment="left" minValue="10" maxValue="100" doubleValue="30" tickMarkPosition="above" sliderType="linear" id="sah-OL-3pv"/>
                                                 <connections>
-                                                    <action selector="speedSliderAction:" target="XfG-lQ-9wD" id="Lnf-se-M1m"/>
+                                                    <action selector="speedSlider:" target="24w-vA-gUk" id="AkM-uD-V9J"/>
                                                 </connections>
                                             </slider>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-yt-Wfk">
@@ -893,7 +900,7 @@
                                                 </constraints>
                                                 <sliderCell key="cell" state="on" alignment="left" maxValue="5" doubleValue="1.1111111111111112" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="0fg-gX-RmX"/>
                                                 <connections>
-                                                    <action selector="sensitivitySliderAction:" target="XfG-lQ-9wD" id="83Z-eF-uEi"/>
+                                                    <action selector="senSlider:" target="24w-vA-gUk" id="slQ-ds-Gx3"/>
                                                 </connections>
                                             </slider>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-WD-mqy">
@@ -922,7 +929,7 @@
                                                     </menu>
                                                 </popUpButtonCell>
                                                 <connections>
-                                                    <action selector="selectionButton:" target="XfG-lQ-9wD" id="XaI-e5-moE"/>
+                                                    <action selector="selectionButton:" target="24w-vA-gUk" id="01b-rC-Xqx"/>
                                                 </connections>
                                             </popUpButton>
                                         </subviews>
@@ -946,7 +953,7 @@
                                             <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </shadow>
                                     </customView>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-gZ-y6B">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-gZ-y6B">
                                         <rect key="frame" x="302" y="250" width="491" height="154"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="iuH-pd-zO9">
@@ -978,6 +985,9 @@
                         <outlet property="label" destination="G9w-gZ-y6B" id="xrV-qo-82D"/>
                         <outlet property="sView" destination="1RB-0F-1b3" id="IgM-YW-X30"/>
                         <outlet property="sceneView" destination="DYk-is-e4n" id="6fC-e8-5sV"/>
+                        <outlet property="selection" destination="CKK-l6-OZR" id="K0J-6n-956"/>
+                        <outlet property="sensitivity" destination="lgv-LB-fS4" id="SfY-aY-Vv9"/>
+                        <outlet property="speed" destination="lKo-7I-p5t" id="JL9-lO-Lo5"/>
                     </connections>
                 </viewController>
                 <customObject id="OHo-8s-QVk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

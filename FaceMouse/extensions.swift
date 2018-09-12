@@ -52,3 +52,41 @@ extension NSView {
     }
 }
 
+extension CGPoint {
+    func getRandom(rect: NSRect)-> CGPoint {
+        func random(min: Int, _ max: Int) -> Int {
+            guard min < max else {return min}
+            return Int(arc4random_uniform(UInt32(1 + max - min))) + min
+        }
+        let x = random(min: Int(rect.minX + 40) , Int(rect.maxX - 40))
+        let y = random(min: Int(rect.minY + 100) , Int(rect.maxY - 40))
+        return CGPoint(x: x, y: y)
+    }
+}
+
+
+func getSpeed() -> Int {
+    if let session = UserDefaults.standard.value(forKey: "Speed") as? Int {
+        return session
+    } else {
+        return 40
+    }
+}
+
+func getSensitivity() -> Float {
+    if let session = UserDefaults.standard.value(forKey: "sensitivity") as? Float {
+        return session
+    } else {
+        return 4
+    }
+}
+
+func getSelection() -> Int {
+    if let session = UserDefaults.standard.value(forKey: "selection") as? Int {
+        return session
+    } else {
+        return 0
+    }
+}
+
+

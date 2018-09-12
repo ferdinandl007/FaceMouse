@@ -10,6 +10,9 @@ import Cocoa
 import Foundation
 import AVFoundation
 
+
+
+
 class FaceMouseViewController: NSViewController {
 
 
@@ -36,18 +39,22 @@ class FaceMouseViewController: NSViewController {
         camara.setSpeed(sensitivityint: 5 - getSensitivity(), speed: getSpeed())
         speedSlider.integerValue = getSpeed()
         sensitivitySlider.floatValue = getSensitivity()
+        selection.selectItem(at: getSelection())
+        
         label.stringValue = "When pressing the start button try to look in the centre of the screen for about 4 seconds"
-//        self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "bob"), sender: nil)
+        self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "bob"), sender: nil)
         
     }
 
 
     @IBAction func clickButton(_ sender: Any) {
         camara.setCanClick(click: Bool(truncating: click.state.rawValue as NSNumber))
+        defaults.set(Bool(truncating: click.state.rawValue as NSNumber), forKey: "clickButton")
     }
     
     @IBAction func selectionButton(_ sender: Any) {
         camara.setSelection(select: selection.indexOfSelectedItem)
+        defaults.set(selection.indexOfSelectedItem, forKey: "selection")
     }
     
     @IBAction func sensitivitySliderAction(_ sender: Any) {
@@ -70,14 +77,14 @@ class FaceMouseViewController: NSViewController {
     }
     @IBAction func button(_ sender: Any) {
         if hasFaceTracking {
-            var cunt = 4
+            var count = 4
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-                if cunt < 1{
-                self.label.stringValue = "We are already to go! Move you ahead to move. For left click smile for  double click close your left eye and smile."
+                if count < 1{
+                    self.label.stringValue = "We are ready to go! Use your head to move the cursor. To left click smile. To ´select´ close your left eye and smile."
                 self.timer.invalidate()
                 } else {
-                    self.label.stringValue = "calibration is in progress Try  to keep your head still for  another \(cunt) Seconds"
-                    cunt -= 1
+                    self.label.stringValue = "calibration is in progress Try  to keep your head still for  another \(count) Seconds"
+                    count -= 1
                 }
             })
             self.camara.faceTracking(yes: true)
@@ -111,20 +118,5 @@ extension FaceMouseViewController {
         }
         return viewcontroller
     }
-    
-    func getSpeed() -> Int {
-        if let session = UserDefaults.standard.value(forKey: "Speed") as? Int {
-            return session
-        } else {
-            return 40
-        }
-    }
-    
-    func getSensitivity() -> Float {
-        if let session = UserDefaults.standard.value(forKey: "sensitivity") as? Float {
-            return session
-        } else {
-            return 4
-        }
-    }
+
 }

@@ -228,19 +228,19 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     }
     
-    func mouseDidMove(position: CGPoint){
+    public func mouseDidMove(position: CGPoint){
        delegate?.mouseDidMove(position: position)
     }
     
-    func faceDidSmile(faceFeature: CIFaceFeature) {
+    public func faceDidSmile(faceFeature: CIFaceFeature) {
         delegate?.faceDidSmile(faceFeature: faceFeature)
     }
     
-    func eyeDidClosed(faceFeature: CIFaceFeature) {
+    public func eyeDidClosed(faceFeature: CIFaceFeature) {
         delegate?.eyeDidClosed(faceFeature: faceFeature)
     }
     
-    fileprivate func time(time: Date? , delay: Double) -> Bool {
+    public func time(time: Date? , delay: Double) -> Bool {
         guard let lastBlink = time else { return false }
         
         let t = Date().timeIntervalSince(lastBlink)
@@ -252,7 +252,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    func mouseWillMoveTo(position: CGPoint) {
+    public func mouseWillMoveTo(position: CGPoint) {
         //  determines if the mouse is meant to be moved or to ignore
         if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.calibrationData[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.calibrationData[1] * fabs(sensitivity - 1)) {
             
@@ -279,7 +279,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    func faceWillSmileClick(faceFeature: CIFaceFeature) {
+    public func faceWillSmileClick(faceFeature: CIFaceFeature) {
         // Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
         
         if faceFeature.hasSmile && canClikc {
@@ -316,7 +316,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     
-    func eyeWillClick(faceFeature: CIFaceFeature) {
+    public func eyeWillClick(faceFeature: CIFaceFeature) {
         //         Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
         if faceFeature.rightEyeClosed && !faceFeature.leftEyeClosed && canClikc {
             if lastRightEyeBlink == nil {
@@ -340,9 +340,6 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
    
-  
-    
-    
     fileprivate func faceDetection(){
         
         let group = DispatchGroup()
