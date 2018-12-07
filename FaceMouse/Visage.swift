@@ -117,7 +117,6 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     //  method used to start running the capture session
     public func beginFaceDetection() {
-        
         //  this starts the face tracking loop
         self.faceTrackingEnds = false
         // This starts the capture session so the camera will turn on now
@@ -210,7 +209,6 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate func allFeatures(sample: CMSampleBuffer) -> [CIFeature]?{
     
         //  casting the sample buffer to CMSampleBuffer and assigning it to pixelBuffer
-//        let pixelBuffer = sample.imageBuffer // MacOS .14
         let pixelBuffer = CMSampleBufferGetImageBuffer(sample)
         let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sample, kCMAttachmentMode_ShouldPropagate)
     
@@ -223,7 +221,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         //  assign an instance of CIdetector to allFeatures and initialise with the CIimage as well as the options
         let allFeatures = self.faceDetector?.features(in: ciImage, options: options)
     
-        //   if allfeatures is not equal to nil. if yes assign allfeatures to features otherwise return
+        // if allfeatures is not equal to nil. if yes assign allfeatures to features otherwise return
         return allFeatures
     
     }
@@ -253,28 +251,27 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     public func mouseWillMoveTo(position: CGPoint) {
+        
         //  determines if the mouse is meant to be moved or to ignore
         if fabs((trueCentre.x - position.x) / trueCentre.x) > (self.calibrationData[0] * sensitivity) || fabs((trueCentre.y - position.y ) / trueCentre.y) > (self.calibrationData[1] * fabs(sensitivity - 1)) {
             
-            // This calculates the Delta on the face to the true centre  and then  applies a corresponding vector to the mouse.
+            // This calculates the Delta on the face to the true centre  and then applies a corresponding vector to the mouse.
             let new = CGPoint(x: mouseLocation.x + (((trueCentre.x - position.x) / trueCentre.x) * speed), y: mouseLocation.y + ((trueCentre.y - position.y) / trueCentre.y) * speed)
             
-            
-            
-            // checking your ex compliment is out of reach of display
+            // checking x component is not out of reach of display
             if new.x > 0 && new.x < rect.maxX  {
                 mouseLocation.x = new.x
             }
-            // checking why component is out of reach of display
+            // checking y component is not out of reach of display
             if new.y > 0 && new.y < rect.maxY  {
                 mouseLocation.y = new.y
             }
             
             if !ispause {
-                
+                //  updating the mouse position by pushing to the OSX  event queue event you
                 let c = CGEvent.init(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: mouseLocation, mouseButton: .left)
                 c?.post(tap: .cgSessionEventTap)
-                print("hi")
+                
             }
         }
     }
@@ -303,21 +300,12 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             lastSmile = nil
         }
         
-        //        if faceFeature.hasSmile && faceFeature.leftEyeClosed {
-        //            if lastLeftEyeBlink == nil {
-        //                lastLeftEyeBlink = Date()
-        //            }
-        //
-        //            if time(time: lastLeftEyeBlink, delay: 2) {
-        //                ispause = !ispause
-        //            }
-        //        }
     }
     
     
     
     public func eyeWillClick(faceFeature: CIFaceFeature) {
-        //         Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
+        //   Checks if  a smile is equal to  the user's smile 3 and if clicking is enabled
         if faceFeature.rightEyeClosed && !faceFeature.leftEyeClosed && canClikc {
             if lastRightEyeBlink == nil {
                 lastRightEyeBlink = Date()
@@ -352,7 +340,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             if let sample = self.sampleBuffers {
                 
   
-                //   if allfeatures is not equal to nil. if yes assign allfeatures to features otherwise return
+                //if allfeatures is not equal to nil. if yes assign allfeatures to features otherwise return
                 guard let features = self.allFeatures(sample: sample) else { return }
                 
                 
@@ -379,8 +367,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                 guard let calYMin = self.calY.min() else {return}
                                 
                                 //  The said calibration data to a empty array
-                                 self.calibrationData = []
-                                
+                                self.calibrationData = []
                                 //  append the difference between minimum maximum as a  percentage Delta to  calibrated data.
                                 self.calibrationData.append((calXMax - calXMin) / calXMax)
                                 self.calibrationData.append((calYMax - calYMin) / calYMax)
@@ -395,6 +382,7 @@ public class Visage: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                 //  add capture data to X and Y
                                 self.calX.append(faceFeature.mouthPosition.x)
                                 self.calY.append(faceFeature.mouthPosition.y)
+                                 print(faceFeature.mouthPosition.y)
                             }
                             
                         } else {
@@ -476,9 +464,6 @@ class Camara: NSView , VisageDelegate{
         camaraRec = Visage()
         
         camaraRec.delegate = self
-    
-
-        
         
         //  gets the  life  view from the visage class
         let cameraView = camaraRec.visageCameraView

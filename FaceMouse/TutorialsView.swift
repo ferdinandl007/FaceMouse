@@ -69,7 +69,7 @@ class TutorialsView: NSViewController {
         
     }
     @IBAction func laftButton(_ sender: Any) {
-        
+         UserDefaults().set(true, forKey: "hasState")
     }
     
     @IBAction func reitBButton(_ sender: Any) {

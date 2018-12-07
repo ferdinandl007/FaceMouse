@@ -144,6 +144,11 @@ class Scene: SKScene , VisageDelegate {
         
         if UserDefaults.standard.bool(forKey: "hasState") {
             visage.beginFaceDetection()
+            mouseNode.isHidden = false
+            for _ in 1...4 {
+                makeBols()
+            }
+            UserDefaults().set(false, forKey: "hasState")
         }
         
         // Called before each frame is rendered
