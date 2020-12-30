@@ -10,7 +10,6 @@
 		B1552C612139174E00BBB1E3 /* experamet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1552C602139174E00BBB1E3 /* experamet.swift */; };
 		CF0D316420D66A2B00B130B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D316320D66A2B00B130B0 /* AppDelegate.swift */; };
 		CF0D316820D66A2C00B130B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF0D316720D66A2C00B130B0 /* Assets.xcassets */; };
-		CF0D316B20D66A2C00B130B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF0D316920D66A2C00B130B0 /* Main.storyboard */; };
 		CF0D317720D66A2C00B130B0 /* FaceMouseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D317620D66A2C00B130B0 /* FaceMouseTests.swift */; };
 		CF0D318220D66A2C00B130B0 /* FaceMouseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D318120D66A2C00B130B0 /* FaceMouseUITests.swift */; };
 		CF0D319020D66A4600B130B0 /* Visage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D318F20D66A4600B130B0 /* Visage.swift */; };
@@ -46,7 +45,6 @@
 		CF0D316020D66A2B00B130B0 /* FaceMouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceMouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0D316320D66A2B00B130B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF0D316720D66A2C00B130B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CF0D316A20D66A2C00B130B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF0D316C20D66A2C00B130B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF0D316D20D66A2C00B130B0 /* FaceMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FaceMouse.entitlements; sourceTree = "<group>"; };
 		CF0D317220D66A2C00B130B0 /* FaceMouseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaceMouseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +124,6 @@
 				CF79DF4F20DCF921009A8B7A /* ButtonViewController.swift */,
 				CF79DF5020DCF921009A8B7A /* ButtonViewController.xib */,
 				CF0D316720D66A2C00B130B0 /* Assets.xcassets */,
-				CF0D316920D66A2C00B130B0 /* Main.storyboard */,
 				CF0D316C20D66A2C00B130B0 /* Info.plist */,
 				CF0D316D20D66A2C00B130B0 /* FaceMouse.entitlements */,
 			);
@@ -264,7 +261,6 @@
 				CF62D488214648FE00A4DD63 /* Scene.sks in Resources */,
 				CF79DF5220DCF921009A8B7A /* ButtonViewController.xib in Resources */,
 				CF0D316820D66A2C00B130B0 /* Assets.xcassets in Resources */,
-				CF0D316B20D66A2C00B130B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,17 +326,6 @@
 			targetProxy = CF0D317E20D66A2C00B130B0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CF0D316920D66A2C00B130B0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF0D316A20D66A2C00B130B0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CF0D318420D66A2C00B130B0 /* Debug */ = {
