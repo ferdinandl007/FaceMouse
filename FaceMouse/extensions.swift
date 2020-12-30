@@ -10,12 +10,9 @@ import Foundation
 
 import Cocoa
 
-
 extension Array where Element: Numeric {
     /// Returns the total sum of all elements in the array
     var total: Element { return reduce(0, +) }
-
-   
 }
 
 extension Array where Element: BinaryInteger {
@@ -32,11 +29,8 @@ extension Array where Element: FloatingPoint {
     }
 }
 
-
 extension NSView {
-    
     var backgroundColor: NSColor? {
-        
         get {
             if let colorRef = self.layer?.backgroundColor {
                 return NSColor(cgColor: colorRef)
@@ -44,26 +38,25 @@ extension NSView {
                 return nil
             }
         }
-        
+
         set {
-            self.wantsLayer = true
-            self.layer?.backgroundColor = newValue?.cgColor
+            wantsLayer = true
+            layer?.backgroundColor = newValue?.cgColor
         }
     }
 }
 
 extension CGPoint {
-    func getRandom(rect: NSRect)-> CGPoint {
+    func getRandom(rect: NSRect) -> CGPoint {
         func random(min: Int, _ max: Int) -> Int {
-            guard min < max else {return min}
+            guard min < max else { return min }
             return Int(arc4random_uniform(UInt32(1 + max - min))) + min
         }
-        let x = random(min: Int(rect.minX + 40) , Int(rect.maxX - 40))
-        let y = random(min: Int(rect.minY + 100) , Int(rect.maxY - 40))
+        let x = random(min: Int(rect.minX + 40), Int(rect.maxX - 40))
+        let y = random(min: Int(rect.minY + 100), Int(rect.maxY - 40))
         return CGPoint(x: x, y: y)
     }
 }
-
 
 func getSpeed() -> Int {
     if let session = UserDefaults.standard.value(forKey: "Speed") as? Int {
@@ -88,5 +81,3 @@ func getSelection() -> Int {
         return 0
     }
 }
-
-

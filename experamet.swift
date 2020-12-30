@@ -5,7 +5,6 @@
 //  Created by ferdinand on 8/31/18.
 //  Copyright © 2018 Ferdinand Lösch. All rights reserved.
 
-
 //        var screenCentre = CGPoint()
 //
 //        if let screen = NSScreen.main { screenCentre = CGPoint(x: screen.frame.width / 2, y: screen.frame.height / 2) } else { return }
